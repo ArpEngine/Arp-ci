@@ -18,7 +18,7 @@ class Env {
 		this.guessProject("ArpSupport");
 		this.prBranch = getEnvOrDefault("ARPCI_PR_BRANCH", "master");
 		this.target = getEnvOrDefault("ARPCI_TARGET", "swf");
-		this.testMain = getEnvOrDefault("ARPCI_MAIN", "arp.ArpSupportAllTests");
+		this.testMain = getEnvOrDefault("ARPCI_MAIN", this.testMain);
 		this.backend = getEnvOrDefault("ARPCI_BACKEND", null);
 
 		calculateDerivedProperties();
@@ -34,6 +34,15 @@ class Env {
 			stderr('project: $project');
 		} else {
 			this.project = defaultValue;
+		}
+
+		this.testMain = switch (this.project) {
+			case "ArpSupport": "arp.ArpSupportAllTests";
+			case "ArpDomain": "arp.ArpDomainAllTests";
+			case "ArpEngine": "arpx.ArpEngineAllTests";
+			case "ArpHitTest": "arp.hit.ArpHitTestAllTests";
+			case "ArpThirdParty": "arpx.ArpThirdpartyAllTests";
+			case _: throw 'Invalid project ${this.project}';
 		}
 	}
 
