@@ -1,0 +1,14 @@
+{
+  "name": "arp_ci",
+  "url" : "https://github.com/ArpEngine/Arp-ci",
+  "license": "MIT",
+  "tags": ["game"],
+  "description": "CI Script for ArpEngine",
+  "version": "0.1.0",
+  "classPath": "src/",
+  "releasenote": "",
+  "contributors": ["kaikoga"],
+  "main": "arpci.Main",
+  "dependencies": {
+  }
+}
