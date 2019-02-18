@@ -29,6 +29,7 @@ class TestCommand {
 			"-lib picotest",
 			"-lib hamcrest",
 			"-lib arp_support",
+			'-cp ${env.arpSupportLibPath}tests', // Some components rely on ArpSupport tests
 			"-lib arp_domain",
 			"-lib arp_hittest",
 			"-cp tests",
