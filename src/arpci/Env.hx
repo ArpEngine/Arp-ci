@@ -6,7 +6,7 @@ import arpci.SysTool.*;
 
 class Env {
 
-	public var project(default, null):String;
+	public var project(default, null):String = "ArpSupport";
 	public var prBranch(default, null):String = "master";
 	public var target(default, null):String = "swf";
 	public var testMain(default, null):String = "arp.ArpSupportAllTests";
@@ -16,10 +16,10 @@ class Env {
 	public var fullName(default, null):String;
 
 	public function new() {
-		this.guessProject("ArpSupport");
+		this.project = getEnvOrDefault("ARPCI_PROJECT", this.guessProject("ArpSupport"));
 		this.prBranch = getEnvOrDefault("ARPCI_PR_BRANCH", "master");
 		this.target = getEnvOrDefault("ARPCI_TARGET", "swf");
-		this.testMain = getEnvOrDefault("ARPCI_MAIN", this.testMain);
+		this.testMain = getEnvOrDefault("ARPCI_MAIN", this.guessTestMain());
 		this.backend = getEnvOrDefault("ARPCI_BACKEND", null);
 		this.arpSupportLibPath = StringTools.trim(new Process('haxelib libpath arp_support').stdout.readAll().toString());
 
@@ -28,7 +28,7 @@ class Env {
 
 	private function guessProject(defaultValue:String):Void {
 		var remotes:String = new Process('git remote -v').stdout.readAll().toString();
-		var ereg = new EReg('^.*\\s+(https://github\\.com/ArpEngine/.*\\.git)\\s+\\(fetch\\)', 'g');
+		var ereg = new EReg('^.*\\s+(https://.*@?github\\.com/ArpEngine/.*\\.git)\\s+\\(fetch\\)', 'g');
 		if (ereg.match(remotes)) {
 			var gitRepo = ereg.matched(1);
 			this.project = gitRepo.split("/").pop().split(".")[0];
@@ -37,8 +37,10 @@ class Env {
 		} else {
 			this.project = defaultValue;
 		}
+	}
 
-		this.testMain = switch (this.project) {
+	private function guessTestMain():String {
+		return switch (this.project) {
 			case "ArpSupport": "arp.ArpSupportAllTests";
 			case "ArpDomain": "arp.ArpDomainAllTests";
 			case "ArpEngine": "arpx.ArpEngineAllTests";
