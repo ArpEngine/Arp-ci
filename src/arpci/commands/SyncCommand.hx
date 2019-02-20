@@ -15,11 +15,11 @@ class SyncCommand {
 		exec('haxelib newrepo');
 
 		// because we will manually install them...
-		// execA("haxelib update");
+		// exec("haxelib update --always");
 
 		haxelibInstall("picotest", "kaikoga/PicoTest", "develop", "src");
 		// latest official release of hamcrest is broken
-		// execA("haxelib install hamcrest");
+		// exec("haxelib install hamcrest --always");
 		haxelibInstall("hamcrest", "kaikoga/hamcrest-haxe", "patch-haxe4-p5", "src");
 
 		haxelibInstall("arp_support", "ArpEngine/ArpSupport");
@@ -34,7 +34,7 @@ class SyncCommand {
 
 	private function haxelibInstall(haxelib:String, path:String, branch:String = null, srcPath:String = null):Void {
 		if (env.project == path.split("/").pop()) {
-			execA('haxelib dev $haxelib .');
+			exec('haxelib dev $haxelib . --always');
 		} else {
 			var gitRepo:String = 'https://github.com/$path.git';
 			if (branch == null) {
@@ -46,7 +46,7 @@ class SyncCommand {
 				}
 			}
 			if (srcPath == null) srcPath = "";
-			execA('haxelib git $haxelib $gitRepo $branch $srcPath');
+			exec('haxelib git $haxelib $gitRepo $branch $srcPath --always');
 		}
 	}
 }

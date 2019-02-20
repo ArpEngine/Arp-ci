@@ -23,11 +23,4 @@ class SysTool {
 		stderr(cmd);
 		Sys.command(cmd);
 	}
-
-	public static function execA(cmd:String):Void {
-		stderr('echo a | $cmd');
-		var proc = new Process(cmd);
-		proc.stdin.writeString("a\n");
-		proc.exitCode();
-	}
 }
