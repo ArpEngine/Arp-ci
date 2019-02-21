@@ -25,6 +25,8 @@ class SyncCommand {
 		haxelibInstall("arp_hittest", "ArpEngine/ArpHitTest");
 		haxelibInstall("arp_engine", "ArpEngine/ArpEngine");
 		haxelibInstall("arp_thirdparty", "ArpEngine/ArpThirdparty");
+
+		exec("haxelib sync arp_ci --always");
 	}
 
 	private function haxelibInstall(haxelib:String, path:String, branch:String = null, srcPath:String = null):Void {
