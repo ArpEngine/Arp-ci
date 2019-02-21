@@ -12,8 +12,6 @@ class SyncCommand {
 	}
 
 	public function execute():Void {
-		exec('haxelib newrepo');
-
 		// because we will manually install them...
 		// exec("haxelib update --always");
 
@@ -27,9 +25,6 @@ class SyncCommand {
 		haxelibInstall("arp_hittest", "ArpEngine/ArpHitTest");
 		haxelibInstall("arp_engine", "ArpEngine/ArpEngine");
 		haxelibInstall("arp_thirdparty", "ArpEngine/ArpThirdparty");
-
-		// and we have to install myself, because we made a newrepo
-		haxelibInstall("arp_ci", "ArpEngine/Arp-ci", "master");
 	}
 
 	private function haxelibInstall(haxelib:String, path:String, branch:String = null, srcPath:String = null):Void {

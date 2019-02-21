@@ -1,12 +1,15 @@
 package arpci;
 
+import haxe.macro.Expr.ExprOf;
 import sys.io.Process;
 
 class SysTool {
 
-	public static function getEnvOrDefault(s:String, defaultValue:String):String {
-		var value:String = Sys.getEnv(s);
-		return if (value != null) value else defaultValue;
+	public macro static function getEnvOrDefault(s:ExprOf<String>, defaultValue:ExprOf<String>):String {
+		return macro @mergeBlock{
+			var value:String = Sys.getEnv($v{s});
+			return if (value != null) value else () => $v{defaultValue};
+		}
 	}
 
 	public static function setCwd(dir:String):Void {
