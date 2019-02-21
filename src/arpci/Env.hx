@@ -45,7 +45,7 @@ class Env {
 			case "ArpDomain": "arp.ArpDomainAllTests";
 			case "ArpEngine": "arpx.ArpEngineAllTests";
 			case "ArpHitTest": "arp.hit.ArpHitTestAllTests";
-			case "ArpThirdParty": "arpx.ArpThirdpartyAllTests";
+			case "ArpThirdparty": "arpx.ArpThirdpartyAllTests";
 			case _: throw 'Invalid project ${this.project}';
 		}
 	}
