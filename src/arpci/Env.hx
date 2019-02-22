@@ -26,17 +26,19 @@ class Env {
 		calculateDerivedProperties();
 	}
 
-	private function guessProject(defaultValue:String):Void {
+	private function guessProject(defaultValue:String):String {
 		var remotes:String = new Process('git remote -v').stdout.readAll().toString();
 		var ereg = new EReg('^.*\\s+(https://.*@?github\\.com/ArpEngine/.*\\.git)\\s+\\(fetch\\)', 'g');
+		var project:String;
 		if (ereg.match(remotes)) {
 			var gitRepo = ereg.matched(1);
-			this.project = gitRepo.split("/").pop().split(".")[0];
+			project = gitRepo.split("/").pop().split(".")[0];
 			stderr('gitRepo: $gitRepo');
 			stderr('project: $project');
 		} else {
-			this.project = defaultValue;
+			project = defaultValue;
 		}
+		return project;
 	}
 
 	private function guessTestMain():String {

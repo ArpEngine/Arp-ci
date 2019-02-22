@@ -1,14 +1,13 @@
 package arpci;
 
 import haxe.macro.Expr.ExprOf;
-import sys.io.Process;
 
 class SysTool {
 
-	public macro static function getEnvOrDefault(s:ExprOf<String>, defaultValue:ExprOf<String>):String {
-		return macro @mergeBlock{
+	public macro static function getEnvOrDefault(s:ExprOf<String>, defaultValue:ExprOf<String>):ExprOf<String> {
+		return macro @mergeBlock {
 			var value:String = Sys.getEnv($e{s});
-			return if (value != null) value else () -> $e{defaultValue};
+			if (value != null) value else (() -> $e{defaultValue})();
 		}
 	}
 
