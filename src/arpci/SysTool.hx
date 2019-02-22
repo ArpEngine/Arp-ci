@@ -7,8 +7,8 @@ class SysTool {
 
 	public macro static function getEnvOrDefault(s:ExprOf<String>, defaultValue:ExprOf<String>):String {
 		return macro @mergeBlock{
-			var value:String = Sys.getEnv($v{s});
-			return if (value != null) value else () => $v{defaultValue};
+			var value:String = Sys.getEnv($e{s});
+			return if (value != null) value else () -> $e{defaultValue};
 		}
 	}
 
