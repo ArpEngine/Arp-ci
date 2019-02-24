@@ -31,6 +31,7 @@ class TestCommand {
 			"-lib arp_support",
 			'-cp ${env.arpSupportLibPath}tests', // Some components rely on ArpSupport tests
 			"-lib arp_domain",
+			'-cp ${env.arpDomainLibPath}tests', // Some components rely on ArpDomain tests
 			"-lib arp_hittest",
 			"-cp tests",
 			'--main ${env.testMain}',

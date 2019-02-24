@@ -11,7 +11,11 @@ class Env {
 	public var target(default, null):String = "swf";
 	public var testMain(default, null):String = "arp.ArpSupportAllTests";
 	public var backend(default, null):String = null;
-	public var arpSupportLibPath(default, null):String = null;
+
+	public var arpSupportLibPath(get, never):String;
+	private function get_arpSupportLibPath():String return StringTools.trim(new Process('haxelib libpath arp_support').stdout.readAll().toString());
+	public var arpDomainLibPath(get, never):String;
+	private function get_arpDomainLibPath():String return StringTools.trim(new Process('haxelib libpath arp_domain').stdout.readAll().toString());
 
 	public var fullName(default, null):String;
 
@@ -21,7 +25,6 @@ class Env {
 		this.target = getEnvOrDefault("ARPCI_TARGET", "swf");
 		this.testMain = getEnvOrDefault("ARPCI_MAIN", this.guessTestMain());
 		this.backend = getEnvOrDefault("ARPCI_BACKEND", null);
-		this.arpSupportLibPath = StringTools.trim(new Process('haxelib libpath arp_support').stdout.readAll().toString());
 
 		calculateDerivedProperties();
 	}
