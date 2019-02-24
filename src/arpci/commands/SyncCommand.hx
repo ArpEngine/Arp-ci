@@ -25,6 +25,14 @@ class SyncCommand {
 		haxelibInstall("arp_hittest", "ArpEngine/ArpHitTest");
 		haxelibInstall("arp_engine", "ArpEngine/ArpEngine");
 		haxelibInstall("arp_thirdparty", "ArpEngine/ArpThirdparty");
+
+		switch env.backend {
+			case "flash", "js", "sys", "stub":
+			case "heaps":
+				exec("haxelib install hamcrest --always");
+			case _:
+				throw 'unknown backend ${env.backend}';
+		}
 	}
 
 	private function haxelibInstall(haxelib:String, path:String, branch:String = null, srcPath:String = null):Void {
