@@ -31,7 +31,6 @@ class SyncCommand {
 			case "heaps":
 				exec("haxelib install hamcrest --always");
 			case _:
-				throw 'unknown backend ${env.backend}';
 		}
 	}
 
