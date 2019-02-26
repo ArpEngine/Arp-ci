@@ -56,7 +56,7 @@ class Env {
 	}
 
 	private function calculateDerivedProperties():Void {
-		this.fullName ='arp_${this.target}';
+		this.fullName = this.target;
 		if (this.backend != null) this.fullName += '_${this.backend}';
 	}
 }
