@@ -11,7 +11,7 @@ class SyncCommand {
 		this.env = env;
 	}
 
-	public function execute():Void {
+	public function execute():Int {
 		// because we will manually install them...
 		// exec("haxelib update --always");
 
@@ -32,6 +32,7 @@ class SyncCommand {
 				exec("haxelib install hamcrest --always");
 			case _:
 		}
+		return 0;
 	}
 
 	private function haxelibInstall(haxelib:String, path:String, branch:String = null, srcPath:String = null):Void {

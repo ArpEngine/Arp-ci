@@ -10,8 +10,8 @@ class TestCommand {
 		this.env = env;
 	}
 
-	public function execute():Void {
-		switch (env.backend) {
+	public function execute():Int {
+		return switch (env.backend) {
 			case "openfl":
 				executeOpenFl();
 			case _:
@@ -19,11 +19,12 @@ class TestCommand {
 		}
 	}
 
-	private function executeOpenFl():Void {
-		throw "Don't know how to test openfl";
+	private function executeOpenFl():Int {
+		stderr("Don't know how to test openfl");
+		return 1;
 	}
 
-	private function executeHaxe():Void {
+	private function executeHaxe():Int {
 		var cmd:Array<String> = [
 			"haxe",
 			"-lib picotest",
@@ -79,6 +80,6 @@ class TestCommand {
 			}) cmd.push(v);
 		}
 
-		exec(cmd.join(" "));
+		return exec(cmd.join(" "));
 	}
 }

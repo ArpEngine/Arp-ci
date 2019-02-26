@@ -23,9 +23,9 @@ class Main {
 
 		switch (args.pop()) {
 			case "sync":
-				new SyncCommand(env).execute();
+				Sys.exit(new SyncCommand(env).execute());
 			case "test":
-				new TestCommand(env).execute();
+				Sys.exit(new TestCommand(env).execute());
 			case _:
 				stderr("usage: arp_ci sync");
 				stderr("       arp_ci test");

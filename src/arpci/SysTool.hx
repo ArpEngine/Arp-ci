@@ -21,8 +21,8 @@ class SysTool {
 		Sys.stderr().flush();
 	}
 
-	public static function exec(cmd:String):Void {
+	public static function exec(cmd:String):Int {
 		stderr(cmd);
-		Sys.command(cmd);
+		return Sys.command(cmd);
 	}
 }
