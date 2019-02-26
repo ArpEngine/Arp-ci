@@ -43,7 +43,7 @@ class TestCommand {
 			"-D picotest_show_stack",
 			"-D picotest_show_trace",
 			"-D picotest_show_ignore",
-			'-D picotest_junit=bin/report/${env.fullName}.xml',
+			'-D picotest_junit=bin/junit/${env.fullName}.xml',
 			'-D picotest_tag=${env.fullName}'
 		];
 
