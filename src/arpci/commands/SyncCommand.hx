@@ -26,12 +26,7 @@ class SyncCommand {
 		haxelibInstall("arp_engine", "ArpEngine/ArpEngine");
 		haxelibInstall("arp_thirdparty", "ArpEngine/ArpThirdparty");
 
-		switch env.backend {
-			case "flash", "js", "sys", "stub":
-			case "heaps":
-				exec("haxelib install heaps --always");
-			case _:
-		}
+		exec("haxelib install heaps --always"); // for heaps backend
 		return 0;
 	}
 
