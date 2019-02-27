@@ -29,7 +29,7 @@ class SyncCommand {
 		switch env.backend {
 			case "flash", "js", "sys", "stub":
 			case "heaps":
-				exec("haxelib install hamcrest --always");
+				exec("haxelib install heaps --always");
 			case _:
 		}
 		return 0;
