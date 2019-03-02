@@ -26,25 +26,44 @@ class SyncCommand {
 		haxelibInstall("arp_engine", "ArpEngine/ArpEngine");
 		haxelibInstall("arp_thirdparty", "ArpEngine/ArpThirdparty");
 
-		exec("haxelib install heaps --always"); // for heaps backend
+		haxelibInstall("heaps"); // for heaps backend
 		return 0;
 	}
 
-	private function haxelibInstall(haxelib:String, path:String, branch:String = null, srcPath:String = null):Void {
-		if (env.project == path.split("/").pop()) {
-			exec('haxelib dev $haxelib . --always');
+	private function haxelibInstall(haxelib:String, path:String = null, branch:String = null, srcPath:String = null) {
+		if (path == null) {
+			haxelibInstallInternal(haxelib, HaxelibPath.Haxelib);
 		} else {
-			var gitRepo:String = 'https://github.com/$path.git';
-			if (branch == null) {
-				var lsRemote:String = new Process('git ls-remote $gitRepo').stdout.readAll().toString();
-				if (new EReg('^.*\\s+refs/heads/${env.prBranch}$', 'g').match(lsRemote)) {
-					branch = env.prBranch;
-				} else {
-					branch = "master";
-				}
-			}
-			if (srcPath == null) srcPath = "";
-			exec('haxelib git $haxelib $gitRepo $branch $srcPath --always');
+			var p = path.split("/");
+			haxelibInstallInternal(haxelib, HaxelibPath.GitHub(p[0], p[1], branch, srcPath));
 		}
 	}
+
+	private function haxelibInstallInternal(haxelib:String, path:HaxelibPath):Void {
+		switch path {
+			case HaxelibPath.Haxelib:
+				exec('haxelib install $haxelib --always');
+			case HaxelibPath.GitHub(user, repo, branch, srcPath):
+				if (env.project == repo) {
+					exec('haxelib dev $haxelib . --always');
+					return;
+				}
+				var gitRepo:String = 'https://github.com/$user/$repo.git';
+				var gitBranch:String = if (branch != null) branch else {
+					var lsRemote:String = new Process('git ls-remote $gitRepo').stdout.readAll().toString();
+					if (new EReg('^.*\\s+refs/heads/${env.prBranch}$', 'g').match(lsRemote)) {
+						env.prBranch;
+					} else {
+						"master";
+					}
+				}
+				var gitSrc = if (srcPath != null) srcPath else "";
+				exec('haxelib git $haxelib $gitRepo $gitBranch $gitSrc --always');
+		}
+	}
+}
+
+enum HaxelibPath {
+	Haxelib;
+	GitHub(user:String, repo:String, branch:String, srcPath:String);
 }
