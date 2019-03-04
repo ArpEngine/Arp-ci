@@ -21,6 +21,7 @@ class HaxelibTool {
 		if (HAXELIB_CACHE == "") return;
 
 		pruneRepo();
+		exec('mkdir -p $HAXELIB_CACHE');
 		exec('rsync -a$RSYNC_VERBOSE --delete .haxelib/ $HAXELIB_CACHE');
 	}
 
