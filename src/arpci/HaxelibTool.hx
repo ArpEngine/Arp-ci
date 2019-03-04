@@ -28,7 +28,9 @@ class HaxelibTool {
 	private static function pruneRepo():Void {
 		for (lib in FileSystem.readDirectory(".haxelib")) {
 			var versions = FileSystem.readDirectory('.haxelib/$lib');
-			if (!versions.remove(".dev")) {
+			if (versions.remove(".dev")) {
+				versions.remove("git"); // may have git repo, so just keep it
+			} else {
 				var currentVersion = File.getContent('.haxelib/$lib/.current');
 				versions.remove(".current");
 				versions.remove(currentVersion.split(".").join(","));
