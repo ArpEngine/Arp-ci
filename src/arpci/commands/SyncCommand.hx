@@ -1,6 +1,7 @@
 package arpci.commands;
 
 import sys.io.Process;
+import arpci.HaxelibTool.*;
 import arpci.SysTool.*;
 
 class SyncCommand {
@@ -12,6 +13,13 @@ class SyncCommand {
 	}
 
 	public function execute():Int {
+		restoreRepo();
+		install();
+		cacheRepo();
+		return 0;
+	}
+
+	public function install():Void {
 		// because we will manually install them...
 		// exec("haxelib update --always");
 
@@ -27,7 +35,6 @@ class SyncCommand {
 		haxelibInstall("arp_thirdparty", "ArpEngine/ArpThirdparty");
 
 		haxelibInstall("heaps"); // for heaps backend
-		return 0;
 	}
 
 	private function haxelibInstall(haxelib:String, path:String = null, branch:String = null, srcPath:String = null) {

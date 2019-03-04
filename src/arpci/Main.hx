@@ -20,6 +20,7 @@ class Main {
 		if (cwd != null) SysTool.setCwd(cwd);
 
 		this.env = new Env();
+		Sys.putEnv("HAXELIB_PATH", ".haxelib");
 
 		switch (args.pop()) {
 			case "sync":
