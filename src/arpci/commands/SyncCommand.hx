@@ -34,6 +34,8 @@ class SyncCommand {
 		haxelibInstall("arp_engine", "ArpEngine/ArpEngine");
 		haxelibInstall("arp_thirdparty", "ArpEngine/ArpThirdparty");
 
+		haxelibInstall("hxcpp"); // for cpp target
+
 		haxelibInstall("heaps"); // for heaps backend
 	}
 
