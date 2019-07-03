@@ -74,7 +74,7 @@ class TestCommand {
 				case "heaps":
 					['-D arp_backend_${env.backend}', "-lib heaps"];
 				case "js":
-					['-D arp_display_backend_stub', '-D arp_input_backend_js', '-D arp_audio_backend_js', '-D arp_socket_backend_stub', '-D arp_storage_backend_js'];
+					['-D arp_display_backend_stub', '-D arp_input_backend_js', '-D arp_audio_backend_js', '-D arp_file_backend_js', '-D arp_socket_backend_stub', '-D arp_storage_backend_js'];
 				case _:
 					throw 'unknown backend ${env.backend}';
 			}) cmd.push(v);
