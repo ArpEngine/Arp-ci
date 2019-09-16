@@ -15,6 +15,7 @@ class HaxelibTool {
 
 		exec('haxelib deleterepo');
 		exec('haxelib newrepo');
+		exec('haxelib git arp_ci https://github.com/ArpEngine/Arp-ci master --always');
 	}
 
 	public static function restoreRepo():Void {
