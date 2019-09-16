@@ -16,7 +16,7 @@ class SyncCommand {
 		// ISSUE: haxelib git deletes its dependencies when installing the second time
 		// https://github.com/HaxeFoundation/haxelib/issues/458
 		// restoreRepo();
-		deleteRepo();
+		flushRepo();
 		install();
 		cacheRepo();
 		return 0;
