@@ -9,6 +9,13 @@ class HaxelibTool {
 	// private static var RSYNC_VERBOSE = 'v';
 	private static var RSYNC_VERBOSE = '';
 
+	public static function deleteRepo():Void {
+		var HAXELIB_CACHE = getEnvOrDefault("HAXELIB_CACHE", "");
+		if (HAXELIB_CACHE == "") return;
+
+		exec('haxelib deleterepo');
+	}
+
 	public static function restoreRepo():Void {
 		var HAXELIB_CACHE = getEnvOrDefault("HAXELIB_CACHE", "");
 		if (HAXELIB_CACHE == "") return;
