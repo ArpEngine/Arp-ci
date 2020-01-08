@@ -54,6 +54,8 @@ class TestCommand {
 				['-js bin/${env.fullName}.js', '--macro "picotest.PicoTest.warn(\\"browser\\")"'];
 			case "neko":
 				['-neko bin/${env.fullName}.n', "-D picotest_thread", '--macro "picotest.PicoTest.warn()"'];
+			case "hl":
+				['-hl bin/${env.fullName}.hl', "-D picotest_thread", '--macro "picotest.PicoTest.warn()"'];
 			case "cpp":
 				['-cpp bin/${env.fullName}_cpp', "-D picotest_thread", '--macro "picotest.PicoTest.warn()"'];
 			case _:
