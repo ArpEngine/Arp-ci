@@ -54,10 +54,10 @@ class SyncCommand {
 	private function haxelibInstallInternal(haxelib:String, path:HaxelibPath):Void {
 		switch path {
 			case HaxelibPath.Haxelib:
-				exec('haxelib install $haxelib --always');
+				exec('haxelib install $haxelib --always --quiet');
 			case HaxelibPath.GitHub(user, repo, branch, srcPath):
 				if (env.project == repo) {
-					exec('haxelib dev $haxelib . --always');
+					exec('haxelib dev $haxelib . --always --quiet');
 					return;
 				}
 				var gitRepo:String = 'https://github.com/$user/$repo.git';
@@ -70,7 +70,7 @@ class SyncCommand {
 					}
 				}
 				var gitSrc = if (srcPath != null) srcPath else "";
-				exec('haxelib git $haxelib $gitRepo $gitBranch $gitSrc --always');
+				exec('haxelib git $haxelib $gitRepo $gitBranch $gitSrc --always --quiet');
 		}
 	}
 }
