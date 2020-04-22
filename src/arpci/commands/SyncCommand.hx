@@ -27,9 +27,7 @@ class SyncCommand {
 		// exec("haxelib update --always");
 
 		haxelibInstall("picotest", "kaikoga/PicoTest", "develop", "src");
-		// latest official release of hamcrest is broken
-		// exec("haxelib install hamcrest --always");
-		haxelibInstall("hamcrest", "kaikoga/hamcrest-haxe", "patch-haxe4-p5", "src");
+		haxelibInstall("hamcrest");
 
 		haxelibInstall("arp_support", "ArpEngine/ArpSupport");
 		haxelibInstall("arp_domain", "ArpEngine/ArpDomain");
@@ -39,7 +37,7 @@ class SyncCommand {
 
 		haxelibInstall("hxcpp"); // for cpp target
 
-		haxelibInstall("heaps"); // for heaps backend
+		haxelibInstall("heaps", "kaikoga/heaps", "track_alloc_stage3d"); // for heaps backend
 	}
 
 	private function haxelibInstall(haxelib:String, path:String = null, branch:String = null, srcPath:String = null) {
